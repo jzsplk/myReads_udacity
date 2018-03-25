@@ -7,7 +7,7 @@ class BookShelf extends Component {
 
 		return (
 			<div className="bookshelf">
-                  <h2 className="bookshelf-title">1Currently Reading</h2>
+                  <h2 className="bookshelf-title">{books[0].status}</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     	{books.map(book => (
