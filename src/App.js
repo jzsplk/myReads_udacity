@@ -1,6 +1,8 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
+import BookShelf from './BookShelf'
+
 
 class BooksApp extends React.Component {
   state = {
@@ -10,7 +12,21 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    showSearchPage: false,
+    readingBooks: [
+                    { coverURL: "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api",
+                      title: "To Kill a Mockingbird",
+                      author: "Harper Lee",
+                      status: "reading"
+                    },
+                    { coverURL: "http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api",
+                      title: "Ender's Game",
+                      author: "Orson Scott Card",
+                      status: "reading"
+                    }
+                  ],
+    wantBooks:[],
+    readedBooks:[]
   }
 
   render() {
@@ -196,6 +212,7 @@ class BooksApp extends React.Component {
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
             </div>
+            <BookShelf books={this.state.readingBooks} />
           </div>
         )}
       </div>
