@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link, Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import './App.css'
 import BookShelf from './BookShelf'
 import Search from './Search'
-import { Link } from 'react-router-dom'
-import { Route } from 'react-router-dom'
+import './App.css'
+
+
 
 class BooksApp extends React.Component {
   state = {
@@ -14,8 +15,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false,
-    books: [
+    books1: [
       { imageLinks: {smallThumbnail:"http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"},
         title: "To Kill a Mockingbird",
         authors: ["Harper Lee"],
@@ -53,42 +53,36 @@ class BooksApp extends React.Component {
       }
 
     ],
-    books1 : [],
-    searchBooks: []  
+    books : [],
+    searchBooks: [],
+    updating: false  
   }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       console.log(books)
-      this.setState({books1: books})
+      this.setState({books: books})
     })
   }
 
-  updateBooks = (book, shelf) => {
-    this.setState((state) => ({
-      books: state.books.map((b) => ( b.title === book.title ? {
-        imageLinks: b.imageLinks,
-        title: b.title,
-        authors: b.authors,
-        shelf: shelf
-      } : {
-        imageLinks: b.imageLinks,
-        title: b.title,
-        authors: b.authors,
-        shelf: b.shelf
-      }))
-    }))
+  componentWillReceiveProps(){
+      // Remove the process indicator
+      this.setState({
+          updating: false
+      });
   }
 
   updateAPIBooks = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       //updage local data
       book.shelf = shelf
-
       //update the state 
       this.setState(state => ({
-        book1: state.books1.filter(b => b.id !== book.id).concat([ book ])
+        books: state.books.filter(b => b.id !== book.id).concat([ book ])
       }))
+      this.setState({
+        updating: true
+      })
     })
   }
 
@@ -97,14 +91,10 @@ class BooksApp extends React.Component {
       BooksAPI.search(query).then(data => { 
         console.log(data) 
         this.setState({searchBooks: data})
-      })
+      }).catch(this.setState({searchBooks: []}))
     } else {
       this.setState( { searchBooks: [] } )
     }
-  }
-
-  backToIndex = () => {
-    this.setState({ showSearchPage: false })
   }
 
   render() {
@@ -112,7 +102,8 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route exact path="/create" render={() => (
           <div className="search-books">
-            <Search books={this.state.searchBooks} onUpdateQuery={this.updateQuery} onUpdateBooks={this.updateAPIBooks} backToIndex={this.backToIndex} />
+          { this.state.updating && (<div className="cssload-spin-box"></div>)}
+            <Search books={this.state.searchBooks} onUpdateQuery={this.updateQuery} onUpdateBooks={this.updateAPIBooks} />
           </div>
         )} />
 
@@ -124,7 +115,7 @@ class BooksApp extends React.Component {
             <div className="open-search">
               <Link to="/create" onClick={() => this.setState({ showSearchPage: true })}>Add a book</Link>
             </div>
-            <BookShelf onUpdateBooks={this.updateAPIBooks} books={this.state.books1} />
+            <BookShelf onUpdateBooks={this.updateAPIBooks} books={this.state.books} />
           </div>
         )} />
       </div>
