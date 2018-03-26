@@ -3,6 +3,11 @@ import Book from './Book'
 import PropTypes from 'prop-types'
 
 class Search extends Component {
+	static propTypes = {
+	    books: PropTypes.array.isRequired,
+	    onUpdateQuery: PropTypes.func.isRequired
+	};
+
 	state = {
 		query: ''
 	}
@@ -11,8 +16,9 @@ class Search extends Component {
 	updateQuery = (query) => {
 		if(query) {
 			this.props.onUpdateQuery(query.trim())	
+			this.setState({query: query})
 		} else {
-
+			this.setState( { query: query} )
 		}
 
 	}
@@ -20,12 +26,12 @@ class Search extends Component {
 
 
 	render() {
-		const { books,onUpdateBooks, backToIndex } = this.props
+		const { books, onUpdateBooks, backToIndex } = this.props;
 
 		return (
 			<div className="search-books">
 			  <div className="search-books-bar">
-			    <a className="close-search" onClick={() => backToIndex}>Close</a>
+			    <a className="close-search" onClick={backToIndex}>Close</a>
 			    <div className="search-books-input-wrapper">
 			      {/*
 			        NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -38,14 +44,15 @@ class Search extends Component {
 			      <input 
 			      	type="text" 
 			      	placeholder="Search by title or author"
+			      	value={this.state.query}
 			      	onChange={(event) => this.updateQuery(event.target.value)}
 			      />
 			    </div>
 			  </div>
 			  <div className="search-books-results">
 			    <ol className="books-grid">
-		        	{books.map(book => (
-		        		<li key={book.title}>
+		        	{this.props.books.map(book => (
+		        		<li key={book.id}>
 		        			<Book book={book} onUpdateBooks={onUpdateBooks} />
 		        		</li>
 		    		))}

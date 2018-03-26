@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelf from './BookShelf'
 import Search from './Search'
+import { Link } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -91,10 +92,14 @@ class BooksApp extends React.Component {
   }
 
   updateQuery = (query) => {
-    BooksAPI.search(query).then(data => { 
-      console.log(data) 
-      this.setState({searchBooks: data})
-    })
+    if(query) {
+      BooksAPI.search(query).then(data => { 
+        console.log(data) 
+        this.setState({searchBooks: data})
+      })
+    } else {
+      this.setState( { searchBooks: [] } )
+    }
   }
 
   backToIndex = () => {
@@ -115,7 +120,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <Link to="/create" onClick={() => this.setState({ showSearchPage: true })}>Add a book</Link>
             </div>
             <BookShelf onUpdateBooks={this.updateAPIBooks} books={this.state.books1} />
 
