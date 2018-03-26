@@ -76,6 +76,23 @@ class BooksApp extends React.Component {
     }))
   }
 
+  updateAPIBooks = (book, shelf) => {
+    this.setState((state) => ({
+      books1: state.books1.map((b) => ( b.title === book.title ? {
+        imageLinks: b.imageLinks,
+        title: b.title,
+        authors: b.authors,
+        shelf: shelf
+      } : {
+        imageLinks: b.imageLinks,
+        title: b.title,
+        authors: b.authors,
+        shelf: b.shelf
+      }))
+    }))
+    BooksAPI.update(book, shelf).then(books => this.setState({book1: books}))
+  }
+
   render() {
     return (
       <div className="app">
@@ -261,7 +278,7 @@ class BooksApp extends React.Component {
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
             </div>
-            <BookShelf onUpdateBooks={this.updateBooks} books={this.state.books1} />
+            <BookShelf onUpdateBooks={this.updateAPIBooks} books={this.state.books1} />
 
 
           </div>
