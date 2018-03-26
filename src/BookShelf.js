@@ -6,9 +6,9 @@ class BookShelf extends Component {
 		const { books, onUpdateBooks } = this.props;
 
 		let readingBooks, wantToReadBooks, readedBooks;
-		readingBooks = books.filter(book => book.status === "currentlyReading");
-		wantToReadBooks = books.filter(book => book.status === "wantToRead");
-		readedBooks = books.filter(book => book.status === "read");
+		readingBooks = books.filter(book => book.shelf === "currentlyReading");
+		wantToReadBooks = books.filter(book => book.shelf === "wantToRead");
+		readedBooks = books.filter(book => book.shelf === "read");
 
 		return (
 			<div>	
@@ -20,9 +20,9 @@ class BookShelf extends Component {
 	                    		<li key={book.title}>
 	                    			<div className="book">
 	                    			  <div className="book-top">
-	                    			    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.coverURL})` }}></div>
+	                    			    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
 	                    			    <div className="book-shelf-changer">
-	                    			      <select value={book.status} onChange={(event) => onUpdateBooks(book, event.target.value)}>
+	                    			      <select value={book.shelf} onChange={(event) => onUpdateBooks(book, event.target.value)}>
 	                    			        <option value="none" disabled>Move to...</option>
 	                    			        <option value="currentlyReading">Currently Reading</option>
 	                    			        <option value="wantToRead">Want to Read</option>
@@ -32,7 +32,7 @@ class BookShelf extends Component {
 	                    			    </div>
 	                    			  </div>
 	                    			  <div className="book-title">{book.title}</div>
-	                    			  <div className="book-authors">{book.author}</div>
+	                    			  <div className="book-authors">{book.authors[0]}</div>
 	                    			</div>
 	                    		</li>
 	                		))}
@@ -47,9 +47,9 @@ class BookShelf extends Component {
                         		<li key={book.title}>
                         			<div className="book">
                         			  <div className="book-top">
-                        			    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.coverURL})` }}></div>
+                        			    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                         			    <div className="book-shelf-changer">
-                        			      <select value={book.status} onChange={(event) => onUpdateBooks(book, event.target.value)}>
+                        			      <select value={book.shelf} onChange={(event) => onUpdateBooks(book, event.target.value)}>
                         			        <option value="none" disabled>Move to...</option>
                         			        <option value="currentlyReading">Currently Reading</option>
                         			        <option value="wantToRead">Want to Read</option>
@@ -59,7 +59,7 @@ class BookShelf extends Component {
                         			    </div>
                         			  </div>
                         			  <div className="book-title">{book.title}</div>
-                        			  <div className="book-authors">{book.author}</div>
+                        			  <div className="book-authors">{book.authors[0]}</div>
                         			</div>
                         		</li>
                     		))}
@@ -74,9 +74,9 @@ class BookShelf extends Component {
                         		<li key={book.title}>
                         			<div className="book">
                         			  <div className="book-top">
-                        			    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.coverURL})` }}></div>
+                        			    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                         			    <div className="book-shelf-changer">
-                        			      <select value={book.status} onChange={(event) => onUpdateBooks(book, event.target.value)}>
+                        			      <select value={book.shelf} onChange={(event) => onUpdateBooks(book, event.target.value)}>
                         			        <option value="none" disabled>Move to...</option>
                         			        <option value="currentlyReading">Currently Reading</option>
                         			        <option value="wantToRead">Want to Read</option>
@@ -86,7 +86,7 @@ class BookShelf extends Component {
                         			    </div>
                         			  </div>
                         			  <div className="book-title">{book.title}</div>
-                        			  <div className="book-authors">{book.author}</div>
+                        			  <div className="book-authors">{book.authors[0]}</div>
                         			</div>
                         		</li>
                     		))}
