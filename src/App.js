@@ -56,6 +56,7 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
+      console.log(books)
       this.setState({books1: books})
     })
   }
@@ -77,20 +78,14 @@ class BooksApp extends React.Component {
   }
 
   updateAPIBooks = (book, shelf) => {
-    this.setState((state) => ({
-      books1: state.books1.map((b) => ( b.title === book.title ? {
-        imageLinks: b.imageLinks,
-        title: b.title,
-        authors: b.authors,
-        shelf: shelf
-      } : {
-        imageLinks: b.imageLinks,
-        title: b.title,
-        authors: b.authors,
-        shelf: b.shelf
+    BooksAPI.update(book, shelf).then(() => {
+      //updage local data
+      book.shelf = shelf
+
+      this.setState(state => ({
+        book1: state.books1.filter(b => b.id !== book.id).concat([ book ])
       }))
-    }))
-    BooksAPI.update(book, shelf).then(books => this.setState({book1: books}))
+    })
   }
 
   render() {
@@ -110,7 +105,6 @@ class BooksApp extends React.Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input type="text" placeholder="Search by title or author"/>
-                {JSON.stringify(this.state.books1)}
               </div>
             </div>
             <div className="search-books-results">
