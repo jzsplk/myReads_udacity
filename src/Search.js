@@ -19,7 +19,7 @@ class Search extends Component {
 			this.props.onUpdateQuery(query.trim())	
 			this.setState({query: query})
 		} else {
-			this.setState( { query: query} )
+			this.setState( { query: ''} )
 		}
 
 	}
@@ -27,12 +27,12 @@ class Search extends Component {
 
 
 	render() {
-		const { books, onUpdateBooks, backToIndex } = this.props;
+		const { books, onUpdateBooks } = this.props;
 
 		return (
 			<div className="search-books">
 			  <div className="search-books-bar">
-			    <Link  to="/" className="close-search" onClick={backToIndex}>Close</Link>
+			    <Link  to="/" className="close-search" >Close</Link>
 			    <div className="search-books-input-wrapper">
 			      {/*
 			        NOTES: The search from BooksAPI is limited to a particular set of search terms.

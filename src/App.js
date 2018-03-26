@@ -60,7 +60,7 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log(books)
+      console.log('books', books)
       this.setState({books: books})
     })
   }
@@ -76,7 +76,8 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, shelf).then(() => {
       //updage local data
       book.shelf = shelf
-      //update the state 
+
+      //update the state books
       this.setState(state => ({
         books: state.books.filter(b => b.id !== book.id).concat([ book ])
       }))
@@ -89,8 +90,17 @@ class BooksApp extends React.Component {
   updateQuery = (query) => {
     if(query) {
       BooksAPI.search(query).then(data => { 
-        console.log(data) 
+        console.log('search results', data) 
+        //检查搜索结果是否在books中，如果在，更新该book的shelf属性
+        data.map(book => {
+          this.state.books.forEach((b) => {
+            if(b.id === book.id) {
+              book.shelf = b.shelf
+            }
+          })
+        })
         this.setState({searchBooks: data})
+
       }).catch(this.setState({searchBooks: []}))
     } else {
       this.setState( { searchBooks: [] } )
