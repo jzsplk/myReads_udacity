@@ -4,6 +4,7 @@ import './App.css'
 import BookShelf from './BookShelf'
 import Search from './Search'
 import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -109,12 +110,13 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
+        <Route exact path="/create" render={() => (
           <div className="search-books">
             <Search books={this.state.searchBooks} onUpdateQuery={this.updateQuery} onUpdateBooks={this.updateAPIBooks} backToIndex={this.backToIndex} />
           </div>
+        )} />
 
-        ) : (
+        <Route exact path="/" render={() => (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -123,10 +125,8 @@ class BooksApp extends React.Component {
               <Link to="/create" onClick={() => this.setState({ showSearchPage: true })}>Add a book</Link>
             </div>
             <BookShelf onUpdateBooks={this.updateAPIBooks} books={this.state.books1} />
-
-
           </div>
-        )}
+        )} />
       </div>
     )
   }

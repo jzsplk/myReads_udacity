@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class Search extends Component {
 	static propTypes = {
@@ -31,7 +32,7 @@ class Search extends Component {
 		return (
 			<div className="search-books">
 			  <div className="search-books-bar">
-			    <a className="close-search" onClick={backToIndex}>Close</a>
+			    <Link  to="/" className="close-search" onClick={backToIndex}>Close</Link>
 			    <div className="search-books-input-wrapper">
 			      {/*
 			        NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -51,7 +52,7 @@ class Search extends Component {
 			  </div>
 			  <div className="search-books-results">
 			    <ol className="books-grid">
-		        	{this.props.books.map(book => (
+		        	{books.map(book => (
 		        		<li key={book.id}>
 		        			<Book book={book} onUpdateBooks={onUpdateBooks} />
 		        		</li>
