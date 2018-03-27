@@ -92,16 +92,18 @@ class BooksApp extends React.Component {
       BooksAPI.search(query).then(data => { 
         console.log('search results', data) 
         //检查搜索结果是否在books中，如果在，更新该book的shelf属性
-        data.map(book => {
-          this.state.books.forEach((b) => {
-            if(b.id === book.id) {
-              book.shelf = b.shelf
-            }
+        if(data.length) {
+          data.map(book => {
+            this.state.books.forEach((b) => {
+              if(b.id === book.id) {
+                book.shelf = b.shelf
+              }
+            })
           })
-        })
-        this.setState({searchBooks: data})
+          this.setState({ searchBooks: data })
+        }
 
-      }).catch(this.setState({searchBooks: []}))
+      })
     } else {
       this.setState( { searchBooks: [] } )
     }
@@ -110,7 +112,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route exact path="/create" render={() => (
+        <Route exact path="/search" render={() => (
           <div className="search-books">
           { this.state.updating && (<div className="cssload-spin-box"></div>)}
             <Search books={this.state.searchBooks} onUpdateQuery={this.updateQuery} onUpdateBooks={this.updateAPIBooks} />
@@ -123,7 +125,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="open-search">
-              <Link to="/create" onClick={() => this.setState({ showSearchPage: true })}>Add a book</Link>
+              <Link to="/search" >Add a book</Link>
             </div>
             <BookShelf onUpdateBooks={this.updateAPIBooks} books={this.state.books} />
           </div>

@@ -1,3 +1,32 @@
+Alex的前端纳米学位图书跟踪项目
+====================
+## Project Purpose
+- 项目使用React，练习React构建APP
+
+## How to Load the game
+
+- Clone the **[repo](git@github.com:jzsplk/myReads_udacity.git)** 
+- run ```npm install```  and ```npm start```-- 
+
+## Resources used to create the game:
+
+### Tool:
+
+- create react app 
+
+###  react resource:
+
+
+- <https://doc.react-china.org/docs/thinking-in-react.html>
+
+
+
+#### Udacity Resources:
+
+- [Project Description](https://classroom.udacity.com/nanodegrees/nd001-cn-advanced/parts/b5ec1c28-f1d6-4a80-bcb1-6977c2411e2a/modules/bdfa2bec-c3ec-4d26-b124-68baa82662c7/lessons/5d31386c-8c1c-4f32-974d-6bf3c1062cba/concepts/e7df4589-29d8-4d49-b760-a1db72d6cbdb)
+- [Project Rubric](https://review.udacity.com/#!/rubrics/1198/view)
+
+# map_project_udacity
 # MyReads Project
 
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
