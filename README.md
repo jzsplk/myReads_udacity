@@ -27,6 +27,9 @@ Alex的前端纳米学位图书跟踪项目
 - <http://demo.nimius.net/debounce_throttle/>
 - <https://www.npmjs.com/package/react-throttle>
 
+### 重复利用<div>代码
+- <https://segmentfault.com/q/1010000003793841>
+
 #### Udacity Resources:
 
 - [Project Description](https://classroom.udacity.com/nanodegrees/nd001-cn-advanced/parts/b5ec1c28-f1d6-4a80-bcb1-6977c2411e2a/modules/bdfa2bec-c3ec-4d26-b124-68baa82662c7/lessons/5d31386c-8c1c-4f32-974d-6bf3c1062cba/concepts/e7df4589-29d8-4d49-b760-a1db72d6cbdb)

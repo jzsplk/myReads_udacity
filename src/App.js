@@ -16,8 +16,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books : [],
-    searchBooks: [],
-    updating: false
+    searchBooks: []
   }
 
 
@@ -29,13 +28,6 @@ class BooksApp extends React.Component {
     }).catch(e => { console.log('err fetching data from API', e) })
   }
 
-  componentWillReceiveProps(){
-      // Remove the process indicator
-      this.setState({
-          updating: false
-      });
-  }
-
   updateAPIBooks = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       //updage local data
@@ -45,9 +37,6 @@ class BooksApp extends React.Component {
       this.setState(state => ({
         books: state.books.filter(b => b.id !== book.id).concat([ book ])
       }))
-      this.setState({
-        updating: true
-      })
     }).catch( e => {console.log('error changing shelf of the book', e)} )
   }
 
