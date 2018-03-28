@@ -17,8 +17,10 @@ class BooksApp extends React.Component {
      */
     books : [],
     searchBooks: [],
-    updating: false  
+    updating: false
   }
+
+
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
@@ -70,6 +72,8 @@ class BooksApp extends React.Component {
       this.setState( { searchBooks: [] } )
     }
   }
+
+
 
   render() {
     return (

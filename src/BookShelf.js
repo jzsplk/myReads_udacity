@@ -5,49 +5,33 @@ class BookShelf extends Component {
 	render() {
 		const { books, onUpdateBooks } = this.props;
 
-		let readingBooks, wantToReadBooks, readedBooks;
-		readingBooks = books.filter(book => book.shelf === "currentlyReading");
-		wantToReadBooks = books.filter(book => book.shelf === "wantToRead");
-		readedBooks = books.filter(book => book.shelf === "read");
+		let shelfs, showShelfs;
+    shelfs = [  
+              {"shelfName": "Currently Reading", "shelfBooks": "currentlyReading"}, 
+              {"shelfName": "Want to Read", "shelfBooks": "wantToRead"}, 
+              {"shelfName": "Read", "shelfBooks": "read"} 
+            ] 
+    showShelfs = shelfs.map(shelf => 
+              <div key={shelf.shelfName} className="bookshelf">
+                    <h2 className="bookshelf-title">{shelf.shelfName}</h2>
+                    <div className="bookshelf-books">
+                      <ol className="books-grid">
+                        {books.filter(book => book.shelf === shelf.shelfBooks).map(book => (
+                          <li key={book.title}>
+                            <Book book={book} onUpdateBooks={onUpdateBooks} />
+                          </li>
+                      ))}
+                      </ol>
+                    </div>
+              </div>    
+    )
 
 		return (
 			<div>	
-				<div className="bookshelf">
-	                  <h2 className="bookshelf-title">Currently Reading</h2>
-	                  <div className="bookshelf-books">
-	                    <ol className="books-grid">
-	                    	{readingBooks.map(book => (
-	                    		<li key={book.title}>
-	                    			<Book book={book} onUpdateBooks={onUpdateBooks} />
-	                    		</li>
-	                		))}
-	                    </ol>
-	                  </div>
-	            </div>
-    			<div className="bookshelf">
-                      <h2 className="bookshelf-title">Want to Read</h2>
-                      <div className="bookshelf-books">
-                        <ol className="books-grid">
-                        	{wantToReadBooks.map(book => (
-                        		<li key={book.title}>
-                        			<Book book={book} onUpdateBooks={onUpdateBooks} />
-                        		</li>
-                    		))}
-                        </ol>
-                      </div>
-                </div>
-    			<div className="bookshelf">
-                      <h2 className="bookshelf-title">Read</h2>
-                      <div className="bookshelf-books">
-                        <ol className="books-grid">
-                        	{readedBooks.map(book => (
-                        		<li key={book.title}>
-                        			<Book book={book} onUpdateBooks={onUpdateBooks} />
-                        		</li>
-                    		))}
-                        </ol>
-                      </div>
-                </div>
+          {/*
+            重复利用书架的代码，直接用数组中div形成三个书架
+          */}
+          {showShelfs}
 			</div>
 
 		)
