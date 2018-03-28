@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import ShelfSelect from './ShelfSelect'
+import PropTypes from 'prop-types'
 
 class Book extends Component {
+	static propTypes = {
+	    book: PropTypes.object.isRequired,
+	    onUpdateBooks: PropTypes.func.isRequired
+	};
+
 	render() {
 		const { book, onUpdateBooks} = this.props
 		const thumbnail = book.imageLinks ? book.imageLinks.thumbnail : 'https://wiki.librarything.com/images/7/7a/Book-cover-blue.jpg'

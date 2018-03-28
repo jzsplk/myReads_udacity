@@ -7,7 +7,8 @@ import * as _ from 'lodash'
 class Search extends Component {
 	static propTypes = {
 	    books: PropTypes.array.isRequired,
-	    onUpdateQuery: PropTypes.func.isRequired
+	    onUpdateQuery: PropTypes.func.isRequired,
+	    onUpdateBooks: PropTypes.func.isRequired
 	};
 
 	state = {
