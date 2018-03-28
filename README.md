@@ -6,7 +6,7 @@ Alex的前端纳米学位图书跟踪项目
 ## How to Load the game
 
 - Clone the **[repo](git@github.com:jzsplk/myReads_udacity.git)** 
-- run ```npm install```  and ```npm start```-- 
+- run ```npm install```  and ```npm start```
 
 ## Resources used to create the game:
 
