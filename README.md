@@ -19,7 +19,8 @@ Alex的前端纳米学位图书跟踪项目
 
 - <https://doc.react-china.org/docs/thinking-in-react.html>
 
-
+### default book cover when no thumbnail from API
+- <https://wiki.librarything.com/index.php/File:Book-cover-blue.jpg>
 
 #### Udacity Resources:
 
