@@ -8,7 +8,7 @@ Alex的前端纳米学位图书跟踪项目
 - Clone the **[repo](git@github.com:jzsplk/myReads_udacity.git)** 
     ```
     git clone git@github.com:jzsplk/myReads_udacity.git
-    cd myreads
+    cd myReads_udacity
     ```
 - run ```npm install```  and ```npm start```
 
