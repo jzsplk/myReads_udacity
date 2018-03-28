@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import * as _ from 'lodash'
 
 class Search extends Component {
 	static propTypes = {
@@ -14,15 +15,24 @@ class Search extends Component {
 	}
 
 
-	updateQuery = (query) => {
-		if(query) {
-			this.props.onUpdateQuery(query.trim())	
-			this.setState({query: query})
-		} else {
-			this.setState( { query: ''} )
-		}
+	updateQuery = _.debounce(query => {
+			if(query) {
+				this.props.onUpdateQuery(query.trim())	
+				this.setState({query: query})
+			} else {
+				this.setState( { query: ''} )
+			}
+		}, 400)
 
-	}
+	// (query) => {
+	// 	if(query) {
+	// 		this.props.onUpdateQuery(query.trim())	
+	// 		this.setState({query: query})
+	// 	} else {
+	// 		this.setState( { query: ''} )
+	// 	}
+
+	// }
 
 
 
